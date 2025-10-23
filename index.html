@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fighting PVP - 網頁版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 主菜單界面 -->
+        <div id="main-menu" class="screen active">
+            <div class="ui-frame">
+                <h1>⚔️ FIGHTING PVP ⚔️</h1>
+                <div class="menu-options">
+                    <button onclick="startGame('easy')">開始遊戲 - 簡單模式</button>
+                    <button onclick="startGame('hell')">開始遊戲 - 地獄模式</button>
+                    <button onclick="showBattleRecord()">查看戰績</button>
+                    <button onclick="showSkills()">查看技能</button>
+                    <button onclick="saveGame()">保存遊戲</button>
+                    <button onclick="loadGame()">載入遊戲</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 戰鬥界面 -->
+        <div id="battle-screen" class="screen">
+            <div class="ui-frame">
+                <h2>戰鬥競技場 - 第<span id="round-count">1</span>回合</h2>
+                
+                <div class="battle-info">
+                    <div class="health-bar">
+                        <label>你的生命值:</label>
+                        <div class="bar-container">
+                            <div id="player-health-bar" class="health-fill"></div>
+                        </div>
+                        <span id="player-health">1000/1000</span>
+                    </div>
+                    
+                    <div class="health-bar">
+                        <label>敵人生命值:</label>
+                        <div class="bar-container">
+                            <div id="enemy-health-bar" class="health-fill enemy"></div>
+                        </div>
+                        <span id="enemy-health">1000/1000</span>
+                    </div>
+                </div>
+
+                <div class="battle-status">
+                    <div id="player-effects" class="status-effects"></div>
+                    <div id="enemy-effects" class="status-effects"></div>
+                </div>
+
+                <div class="enemy-info">
+                    <p>敵人技能: <span id="enemy-skill-name">未知</span></p>
+                </div>
+
+                <div class="battle-log" id="battle-log">
+                    <p>戰鬥開始！選擇你的行動...</p>
+                </div>
+
+                <div class="battle-actions">
+                    <button onclick="playerAction('attack')">普通攻擊</button>
+                    <button onclick="playerAction('skill')">使用技能</button>
+                    <button onclick="playerAction('ultimate')">限定技能</button>
+                    <button onclick="playerAction('heal')">恢復生命</button>
+                    <button onclick="showSkills()">查看技能</button>
+                    <button onclick="endTurn()">結束回合</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技能選擇界面 -->
+        <div id="skill-screen" class="screen">
+            <div class="ui-frame">
+                <h2>技能庫</h2>
+                <div id="skill-list" class="skill-list"></div>
+                <button onclick="backToBattle()">返回戰鬥</button>
+            </div>
+        </div>
+
+        <!-- 戰績界面 -->
+        <div id="record-screen" class="screen">
+            <div class="ui-frame">
+                <h2>戰鬥記錄</h2>
+                <div id="battle-record"></div>
+                <button onclick="backToMenu()">返回主菜單</button>
+            </div>
+        </div>
+
+        <!-- 技能使用界面 -->
+        <div id="skill-select-screen" class="screen">
+            <div class="ui-frame">
+                <h2>選擇技能</h2>
+                <div id="active-skill-list" class="skill-list"></div>
+                <button onclick="backToBattle()">取消</button>
+            </div>
+        </div>
+
+        <!-- 限定技能使用界面 -->
+        <div id="ultimate-skill-screen" class="screen">
+            <div class="ui-frame">
+                <h2>選擇限定技能</h2>
+                <div id="ultimate-skill-list" class="skill-list"></div>
+                <button onclick="backToBattle()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
