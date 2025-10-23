@@ -12,13 +12,23 @@
         <div id="main-menu" class="screen active">
             <div class="ui-frame">
                 <h1>⚔️ FIGHTING PVP ⚔️</h1>
+                <div class="player-stats">
+                    <div>獎杯: <span id="trophy-count">0</span></div>
+                    <div>技能: <span id="skill-count">0</span></div>
+                    <div>戰績: <span id="win-count">0</span>勝 <span id="loss-count">0</span>敗</div>
+                </div>
                 <div class="menu-options">
-                    <button onclick="startGame('easy')">開始遊戲 - 簡單模式</button>
-                    <button onclick="startGame('hell')">開始遊戲 - 地獄模式</button>
+                    <button onclick="startSinglePlayer('easy')">單人模式 - 簡單</button>
+                    <button onclick="startSinglePlayer('hell')">單人模式 - 地獄</button>
+                    <button onclick="startMatchmaking()">匹配模式 (PVP)</button>
                     <button onclick="showBattleRecord()">查看戰績</button>
                     <button onclick="showSkills()">查看技能</button>
                     <button onclick="saveGame()">保存遊戲</button>
-                    <button onclick="loadGame()">載入遊戲</button>
+                    <button onclick="resetGame()">重置遊戲</button>
+                </div>
+                <div id="matchmaking-status" class="matchmaking-status" style="display: none;">
+                    <p>尋找對手中... <span id="matchmaking-timer">0</span>秒</p>
+                    <button onclick="cancelMatchmaking()">取消匹配</button>
                 </div>
             </div>
         </div>
@@ -27,6 +37,7 @@
         <div id="battle-screen" class="screen">
             <div class="ui-frame">
                 <h2>戰鬥競技場 - 第<span id="round-count">1</span>回合</h2>
+                <div class="battle-mode" id="battle-mode">單人模式</div>
                 
                 <div class="battle-info">
                     <div class="health-bar">
@@ -53,6 +64,7 @@
 
                 <div class="enemy-info">
                     <p>敵人技能: <span id="enemy-skill-name">未知</span></p>
+                    <p id="enemy-trophies" style="display: none;">對手獎杯: <span id="enemy-trophy-count">0</span></p>
                 </div>
 
                 <div class="battle-log" id="battle-log">
@@ -60,12 +72,12 @@
                 </div>
 
                 <div class="battle-actions">
-                    <button onclick="playerAction('attack')">普通攻擊</button>
-                    <button onclick="playerAction('skill')">使用技能</button>
-                    <button onclick="playerAction('ultimate')">限定技能</button>
-                    <button onclick="playerAction('heal')">恢復生命</button>
+                    <button id="attack-btn" onclick="playerAction('attack')">普通攻擊</button>
+                    <button id="skill-btn" onclick="playerAction('skill')">使用技能</button>
+                    <button id="ultimate-btn" onclick="playerAction('ultimate')">限定技能</button>
+                    <button id="heal-btn" onclick="playerAction('heal')">恢復生命</button>
                     <button onclick="showSkills()">查看技能</button>
-                    <button onclick="endTurn()">結束回合</button>
+                    <button id="end-turn-btn" onclick="endTurn()">結束回合</button>
                 </div>
             </div>
         </div>
@@ -75,7 +87,7 @@
             <div class="ui-frame">
                 <h2>技能庫</h2>
                 <div id="skill-list" class="skill-list"></div>
-                <button onclick="backToBattle()">返回戰鬥</button>
+                <button onclick="backToPreviousScreen()">返回</button>
             </div>
         </div>
 
@@ -103,6 +115,18 @@
                 <h2>選擇限定技能</h2>
                 <div id="ultimate-skill-list" class="skill-list"></div>
                 <button onclick="backToBattle()">取消</button>
+            </div>
+        </div>
+
+        <!-- 戰鬥結果界面 -->
+        <div id="battle-result-screen" class="screen">
+            <div class="ui-frame">
+                <h2 id="result-title">戰鬥結果</h2>
+                <div id="result-content"></div>
+                <div class="result-actions">
+                    <button onclick="continuePlaying()">繼續遊玩</button>
+                    <button onclick="backToMenu()">返回主菜單</button>
+                </div>
             </div>
         </div>
     </div>

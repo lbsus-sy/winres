@@ -1,284 +1,103 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* 之前的樣式保持不變，添加以下新樣式 */
 
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    color: #fff;
-    min-height: 100vh;
+.player-stats {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-}
-
-.ui-frame {
-    background: rgba(0, 0, 0, 0.8);
-    border: 3px solid #00ffff;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-}
-
-h1, h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #00ffff;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
-
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 50px;
-}
-
-.menu-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-button {
-    background: linear-gradient(45deg, #00ffff, #0080ff);
-    border: none;
-    color: white;
-    padding: 15px 25px;
-    font-size: 1.1em;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
-}
-
-button:disabled {
-    background: #666;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-/* 戰鬥界面樣式 */
-.battle-info {
-    display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 20px;
-}
-
-.health-bar {
-    flex: 1;
-    margin: 0 10px;
-}
-
-.health-bar label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.bar-container {
-    background: #333;
-    border-radius: 10px;
-    height: 25px;
-    overflow: hidden;
-    margin-bottom: 5px;
-}
-
-.health-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #00ff00, #00cc00);
-    transition: width 0.5s ease;
-    border-radius: 10px;
-}
-
-.health-fill.enemy {
-    background: linear-gradient(90deg, #ff0000, #cc0000);
-}
-
-.battle-status {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-.status-effects {
-    flex: 1;
-    margin: 0 10px;
     padding: 10px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    min-height: 40px;
+    border-radius: 8px;
 }
 
-.enemy-info {
+.player-stats div {
     text-align: center;
-    margin: 20px 0;
-    padding: 10px;
-    background: rgba(255, 0, 0, 0.2);
-    border-radius: 5px;
 }
 
-.battle-log {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+.battle-mode {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.matchmaking-status {
+    text-align: center;
+    margin-top: 20px;
     padding: 15px;
-    margin: 20px 0;
-    height: 150px;
-    overflow-y: auto;
-    font-family: monospace;
+    background: rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
 }
 
-.battle-log p {
-    margin: 5px 0;
-    line-height: 1.4;
+.matchmaking-status p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
 }
 
-.battle-actions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+.result-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
     margin-top: 20px;
 }
 
-/* 技能列表樣式 */
-.skill-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
+.trophy-change {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
 }
 
-.skill-item {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 15px;
-    border-left: 4px solid #00ffff;
+.trophy-gain {
+    color: #00ff00;
 }
 
-.skill-item.passive {
-    border-left-color: #ffff00;
+.trophy-loss {
+    color: #ff0000;
 }
 
-.skill-item.ultimate {
-    border-left-color: #ff00ff;
+.skill-change {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
 }
 
-.skill-item.used {
+.skill-gain {
+    background: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+}
+
+.skill-loss {
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+}
+
+/* 禁用狀態的按鈕 */
+button:disabled {
+    background: #666 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
     opacity: 0.6;
 }
 
-.skill-name {
-    font-weight: bold;
-    color: #00ffff;
-    margin-bottom: 5px;
-}
-
-.skill-stats {
-    font-size: 0.9em;
-    color: #ccc;
-    margin-bottom: 5px;
-}
-
-.skill-description {
-    font-size: 0.85em;
-    color: #999;
-    font-style: italic;
-}
-
-.skill-rarity {
-    margin-top: 5px;
-}
-
-.star {
-    color: gold;
-    margin-right: 2px;
-}
-
-.evolve-badge {
-    background: gold;
-    color: black;
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-size: 0.8em;
-    margin-left: 10px;
-    font-weight: bold;
-}
-
-/* 響應式設計 */
+/* 響應式設計改進 */
 @media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-    
-    .ui-frame {
-        padding: 20px;
-    }
-    
-    h1 {
-        font-size: 2em;
-    }
-    
-    .battle-actions {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .battle-info {
+    .player-stats {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
+    }
+    
+    .result-actions {
+        flex-direction: column;
     }
 }
 
-/* 動畫效果 */
-@keyframes damage {
-    0% { background-color: rgba(255, 0, 0, 0.3); }
-    100% { background-color: transparent; }
+/* 加載動畫 */
+@keyframes searching {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
 }
 
-.damage-animation {
-    animation: damage 0.5s ease;
-}
-
-@keyframes heal {
-    0% { background-color: rgba(0, 255, 0, 0.3); }
-    100% { background-color: transparent; }
-}
-
-.heal-animation {
-    animation: heal 0.5s ease;
-}
-
-/* 滾動條樣式 */
-.battle-log::-webkit-scrollbar {
-    width: 8px;
-}
-
-.battle-log::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-.battle-log::-webkit-scrollbar-thumb {
-    background: #00ffff;
-    border-radius: 4px;
+.searching {
+    animation: searching 1.5s infinite;
 }
